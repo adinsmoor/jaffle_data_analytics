@@ -4,7 +4,7 @@ models:
   - name: fct_orders
     access: public
     columns:
-      - name: customer_id
+      - name: order_id
         tests:
           - unique
           - not_null
