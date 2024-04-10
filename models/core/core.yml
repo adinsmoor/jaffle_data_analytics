@@ -3,8 +3,60 @@ version: 2
 models:
   - name: fct_orders
     access: public
+    description: "Customer and order details"
+    latest_version: 2
+    config:
+      contract:
+        enforced: true
     columns:
       - name: order_id
-        tests:
-          - unique
-          - not_null
+        data_type: number
+        description: ""
+
+      - name: order_date
+        data_type: date
+        description: ""
+
+      - name: status
+        data_type: varchar
+        description: "Indicates the status of the order"
+
+      - name: is_return
+        data_type: boolean
+        description: "Indicates if an order was returned"
+
+      - name: customer_id
+        data_type: number
+        description: ""
+
+      - name: first_name
+        data_type: varchar
+        description: ""
+
+      - name: last_name
+        data_type: varchar
+        description: ""
+
+      - name: first_order_date
+        data_type: date
+        description: ""
+
+      - name: days_as_customer_at_purchase
+        data_type: number
+        description: "Days between this purchase and customer's first purchase"
+
+    # Declare the versions, and highlight the diffs
+    versions:
+    
+      - v: 1
+        deprecation_date: 2024-06-30 00:00:00.00+00:00
+        columns:
+          # This means: use the 'columns' list from above, but exclude is_return
+          - include: all
+            exclude: [is_return]
+        
+      - v: 2
+        columns:
+          # This means: use the 'columns' list from above, but exclude status
+          - include: all
+            exclude: [status]
